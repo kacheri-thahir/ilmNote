@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina | Modern Perspectives</title>
+    <link rel="stylesheet" href={% static "css/blog.css" %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">Ilm Note.</div>
+        <div class="auth-buttons">
+            <a href="#" class="btn-login">Log In</a>
+            <a href="#" class="btn-register">Register</a>
+        </div>
+    </nav>
+
+    <div class="category-strip">
+        <ul class="category-list">
+            <li><a href="#" class="active">Trending</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Science</a></li>
+            <li><a href="#">Politics</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Gaming</a></li>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Travel</a></li>
+            <li><a href="#">Health</a></li>
+            <li><a href="#">AI & Future</a></li>
+            <li><a href="#">Culture</a></li>
+        </ul>
+    </div>
+
+    <header class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')">
+        <div class="hero-content">
+            <span class="tag">Featured Story</span>
+            <h1>The Evolution of Minimalist Design in the Digital Age</h1>
+            <p>How aesthetic simplicity is reshaping the way we consume information.</p>
+            <a href="#" class="read-more">Read Article &rarr;</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section-header">
+            <h2>Latest Stories</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="blog-grid">
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tech">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Technology</span>
+                    <h3>The Future of Quantum Computing</h3>
+                    <p>Why the next leap in processing power is closer than you think.</p>
+                    <div class="card-footer">
+                        <span class="author">By Alex Doe</span>
+                        <span class="date">Nov 28, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sports">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Sports</span>
+                    <h3>Data Analytics in Modern Football</h3>
+                    <p>How statistics are changing the strategy behind the beautiful game.</p>
+                    <div class="card-footer">
+                        <span class="author">By Sarah Smith</span>
+                        <span class="date">Nov 27, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1518005052357-e98719a07932?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gaming">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Gaming</span>
+                    <h3>The Rise of Indie Developers</h3>
+                    <p>Small studios are producing the most innovative experiences of the decade.</p>
+                    <div class="card-footer">
+                        <span class="author">By John Wick</span>
+                        <span class="date">Nov 26, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1529896832993-c39b94a807e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Science">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Politics</span>
+                    <h3>Global Policy Shifts in 2025</h3>
+                    <p>Understanding the new geopolitical landscape and economic treaties.</p>
+                    <div class="card-footer">
+                        <span class="author">By Elena Ro</span>
+                        <span class="date">Nov 25, 2025</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>Designed & Created by | Thahir Kacheri❤️</p>
+    </footer>
+
+</body>
+</html>
