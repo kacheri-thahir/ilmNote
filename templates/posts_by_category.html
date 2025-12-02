@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    {% comment %} Featured Posts {% endcomment %}
+
+    <main class="container">
+        <div class="section-header">
+            <h2>CATEGORY -  {{ category }} </h2>        <!-- Here {{category}} (means category name) comes from posts_by_category view -->
+            <div class="divider"></div>
+        </div>
+
+    <div class="blog-grid">
+    {% if posts %}
+    {% for post in posts %}
+    <article class="card">
+        
+        <div class="card-image">
+            {% if post.featured_image %}
+            <img src="{{ post.featured_image.url }}" alt="Blog featured image">
+            {% endif %}
+        </div>
+        
+        <div class="card-content">
+            <span class="card-category">
+                <h3>{{ post.title }}</h3>
+            </span>
+            <h4>{{ post.short_description|truncatewords:10 }}</h4>
+            <p>{{ post.blog_body|truncatewords:10 }}</p>
+            
+            <div class="card-footer">
+                <span class="author">{{ post.author }}</span>
+                <span class="date">{{ post.created_at|timesince }} ago</span>
+            </div>
+        </div>
+        
+        
+    </article>
+    {% endfor %}
+    {% endif %}
+    </div>
+    </main>
+
+{% endblock %}

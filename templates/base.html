@@ -1,0 +1,49 @@
+
+<!-- HEADER SECTION -->
+ {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilm Note</title>
+    <link rel="stylesheet" href={% static "css/blog.css" %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">Ilm Note.</div>
+        <div class="auth-buttons">
+            <a href="#" class="btn-login">Log In</a>
+            <a href="#" class="btn-register">Register</a>
+        </div>
+    </nav>
+
+    <div class="category-strip">
+        <ul class="category-list">
+            {% comment %} <li><a href="#" class="active">Trending</a></li> {% endcomment %}
+            {% comment %} To Print Categories Dynamically (From DB) {% endcomment %}
+            {% for cat in categories %}                                         
+                <li><a href="{% url "posts_by_category" cat.id %}">{{ cat.category_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+<!-- MAIN CONTENT -->
+
+{% block content %}
+
+{% endblock %}
+
+
+<!--FOOTER SECTION -->
+    <footer>
+        <p>Designed & Created by | Thahir Kacheri❤️</p>
+    </footer>
+
+</body>
+</html>
