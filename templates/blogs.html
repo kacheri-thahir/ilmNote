@@ -1,0 +1,85 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Main Article Container -->
+<article class="main-article">
+
+    <!-- Post Header -->
+    <header class="article-header">
+        <div class="article-meta">
+            <!-- Category -->
+            <a href="#!" class="category-tag">{{ single_blog.category }}</a>
+            <!-- Date -->
+            <span class="read-time">{{ single_blog.created_at|date:"M d, Y" }}</span>
+        </div>
+
+        <!-- Post Title -->
+        <h1>{{ single_blog.title }}</h1>
+
+        <!-- Author Meta -->
+        <div class="author-meta">
+            <div class="author-details">
+                <span class="author-name">By {{ single_blog.author }}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Preview Image -->
+    {% if single_blog.featured_image %}
+    <div class="feature-image-wrapper">
+        <img src="{{ single_blog.featured_image.url }}" alt="Blog Featured Image" class="feature-image">
+    </div>
+    {% endif %}
+
+    <!-- Content Grid (Layouts Content Left, Sidebar Right) -->
+    <div class="content-grid">
+
+        <!-- Left Column: Post Content -->
+        <div class="article-body">
+            <!-- Short Description (Styled as lead text) -->
+            <p class="lead-text">{{ single_blog.short_description }}</p>
+            
+            <!-- Main Body -->
+            <div class="blog-text">
+                {{ single_blog.blog_body|linebreaks }}
+            </div>
+        </div>
+
+        <!-- Right Column: Sidebar -->
+        <aside class="sidebar">
+            
+            <!-- Search Widget -->
+            <div class="sidebar-widget">
+                <h3>Search</h3>
+                <div class="search-box">
+                    <form method="GET" action="#"> <!-- Add your search URL here if needed -->
+                        <input type="text" placeholder="Enter search term..." aria-label="Search">
+                        <button type="submit" id="button-search">Go!</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="sidebar-widget">
+                <h3>Categories</h3>
+                <ul class="trending-list">
+                    {% for cat in categories %}
+                    <li>
+                        <span class="number">#</span>
+                        <a href="{% url 'posts_by_category' cat.id %}">{{ cat.category_name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+        </aside>
+
+    </div>
+</article>
+
+{% endblock %}

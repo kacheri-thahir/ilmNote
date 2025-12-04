@@ -15,12 +15,37 @@
 </head>
 <body>
 
-    <nav class="navbar">
+    {% comment %} <nav class="navbar">
         <div class="brand">Ilm Note.</div>
         <div class="auth-buttons">
             <a href="#" class="btn-login">Log In</a>
             <a href="#" class="btn-register">Register</a>
         </div>
+    </nav> {% endcomment %}
+
+
+    <nav class="navbar">
+    <!-- Left: Brand -->
+    <div class="brand">
+        <a href="/">Ilm Note.</a>
+    </div>
+
+    <!-- Middle: Search Bar -->
+    <div class="search-container">
+        <form action="{% url "search" %}" method="GET">
+            <input type="text" name="keyword" value = "{{ keyword }}"  placeholder="Search posts..." aria-label="Search">
+            <button type="submit">
+                <!-- Simple SVG Search Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+        </form>
+    </div>
+
+    <!-- Right: Auth Buttons -->
+    <div class="auth-buttons">
+        <a href="#" class="btn-login">Log In</a>
+        <a href="#" class="btn-register">Register</a>
+    </div>
     </nav>
 
     <div class="category-strip">
@@ -41,8 +66,26 @@
 
 
 <!--FOOTER SECTION -->
-    <footer>
+    {% comment %} <footer>
         <p>Designed & Created by | Thahir Kacheri❤️</p>
+    </footer> {% endcomment %}
+
+    <footer style="background: white; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 4rem; padding: 2rem 5%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 1.5rem;">
+        
+        <!-- Credit Text -->
+        <p style="color: #64748b; font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin: 0;">
+            Designed & Created by | <span style="color: #1a1a1a; font-weight: 500;">Thahir Kacheri</span> ❤️
+        </p>
+
+        <!-- About Button -->
+        <a href="{% url "about" %}" style="text-decoration: none; font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 500; color: #1a1a1a; padding: 8px 24px; border: 1px solid #e2e8f0; border-radius: 50px; transition: all 0.3s ease;" 
+           onmouseover="this.style.background='#1a1a1a'; this.style.color='white'; this.style.borderColor='#1a1a1a'" 
+           onmouseout="this.style.background='transparent'; this.style.color='#1a1a1a'; this.style.borderColor='#e2e8f0'">
+            About Us
+        </a>
+
+        </div>
     </footer>
 
 </body>

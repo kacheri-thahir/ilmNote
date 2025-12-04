@@ -29,8 +29,35 @@ class Blog(models.Model):
     status=models.CharField(max_length=20,choices=STATUS_CHOICE,default="Draft")
     is_featured=models.BooleanField(default=False)
     created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+    
+
+class About(models.Model):
+    about_heading=models.CharField(max_length=25)
+    about_description=models.TextField(max_length=1000)
+    about_image=models.ImageField(upload_to='about_image')
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural='About' 
+
+    def __str__(self):
+        return self.about_heading
+
+
+class Socialmedia_links(models.Model):
+    platform=models.CharField(max_length=30,null=False)
+    link=models.URLField(max_length=100)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural='Socialmedia_links' 
+
+    def __str__(self):
+        return self.platform
     
