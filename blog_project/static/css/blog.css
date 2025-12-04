@@ -740,8 +740,8 @@ footer {
 
 .social-list a {
     padding: 10px 22px;
-    background: #111;
-    color: #fff;
+    background: #fff;
+    color: #111;
     border-radius: 30px;
     text-decoration: none;
     font-size: 0.95rem;
@@ -749,7 +749,7 @@ footer {
 }
 
 .social-list a:hover {
-    background: #333;
+    background: #000001;
 }
 
 /* Responsive */
@@ -940,3 +940,4 @@ footer {
         font-size: 2.5rem !important; /* Overrides inline style slightly for mobile fit */
     }
 }
+

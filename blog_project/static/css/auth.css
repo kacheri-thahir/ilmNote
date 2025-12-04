@@ -1,0 +1,349 @@
+/* Register page css */
+
+:root {
+    --primary: #1a1a1a;
+    --accent: #d946ef; /* Magenta */
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-muted: #64748b;
+    --border-radius: 12px;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Poppins', sans-serif;
+}
+
+/* --- Layout Wrapper (Centers the card) --- */
+.auth-wrapper {
+    min-height: 85vh; /* Takes up full screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 2rem;
+}
+
+/* --- The Card --- */
+.auth-card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 450px; /* Limits width */
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05); /* Soft aesthetic shadow */
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+/* --- Header Styling --- */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-header h1 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.auth-header p {
+    font-family: var(--font-sans);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* --- Django Form Styling --- */
+.aesthetic-form {
+    font-family: var(--font-sans);
+}
+
+/* Targets the <p> tags Django generates */
+.aesthetic-form p {
+    margin-bottom: 1.5rem;
+}
+
+/* Label Styling */
+.aesthetic-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Input Styling (Targets all text-like inputs) */
+.aesthetic-form input[type="text"],
+.aesthetic-form input[type="email"],
+.aesthetic-form input[type="password"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--primary);
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+}
+
+/* Input Focus State */
+.aesthetic-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.1);
+}
+
+/* Help Text (Django styling for password rules) */
+.helptext {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+/* Error Lists (If validation fails) */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+    color: #ef4444; /* Red */
+    font-size: 0.85rem;
+}
+
+/* --- Submit Button --- */
+.btn-submit {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-submit:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(217, 70, 239, 0.3);
+}
+
+/* --- Footer Link --- */
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    transition: 0.3s;
+}
+
+.auth-footer a:hover {
+    color: var(--accent);
+}
+/* 1. Hides standard help text (one-liners) */
+.helptext {
+    display: none !important;
+}
+
+/* 2. Hides the list of password requirements (The bullet points) */
+.aesthetic-form ul {
+    display: none !important;
+}
+
+/* 3. BUT keep validation errors visible (Red text if they make a mistake) */
+.aesthetic-form ul.errorlist {
+    display: block !important; 
+}
+/* --- Mobile --- */
+@media (max-width: 600px) {
+    .auth-card {
+        padding: 2rem;
+    }
+    .auth-header h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* LOGIN PAGE CSS */
+
+/* --- Variables (Matches Theme) --- */
+:root {
+    --primary: #1a1a1a;
+    --accent: #d946ef; /* Magenta */
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-muted: #64748b;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Poppins', sans-serif;
+}
+
+/* --- Layout Wrapper --- */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* --- The Card --- */
+.auth-card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 420px; /* Slightly narrower than register for focus */
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+/* --- Header Styling --- */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-header h1 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.auth-header p {
+    font-family: var(--font-sans);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* --- Form Styling --- */
+.aesthetic-form {
+    font-family: var(--font-sans);
+}
+
+.aesthetic-form p {
+    margin-bottom: 1.5rem;
+}
+
+/* Label Styling */
+.aesthetic-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Input Styling */
+.aesthetic-form input[type="text"],
+.aesthetic-form input[type="password"] {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--primary);
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.aesthetic-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.1);
+}
+
+/* --- Error Alert (Specific to Login) --- */
+.alert-error {
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.alert-error p {
+    margin: 0; /* Remove default paragraph margin inside alert */
+}
+
+/* --- Submit Button --- */
+.btn-submit {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(217, 70, 239, 0.3);
+}
+
+/* --- Footer Link --- */
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    transition: 0.3s;
+}
+
+.auth-footer a:hover {
+    color: var(--accent);
+}
+
+/* --- Mobile --- */
+@media (max-width: 600px) {
+    .auth-card {
+        padding: 2rem;
+    }
+    .auth-header h1 {
+        font-size: 2rem;
+    }
+}
