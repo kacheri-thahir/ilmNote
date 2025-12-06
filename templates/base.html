@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -49,23 +50,41 @@
         <a href="{% url "register" %}" class="btn-register">Register</a>
         {% else %}
         {% comment %} <span><a href="{% url "logout" %}">Logout</a></span>  {% endcomment %}
-        <span>
+        <div style="display: flex; align-items: center; gap: 12px;">
+    
+        <!-- Dashboard Button (Clean Black Style) -->
+        <div style="display: flex; align-items: center; gap: 25px;">
+    
+    <!-- Dashboard Link -->
+        <a href="{% url "dashboard" %}" 
+        style="text-decoration: none; 
+                font-family: 'Poppins', sans-serif; 
+                font-size: 1rem; /* Medium Size */
+                font-weight: 500; 
+                color: #64748b; /* Muted Grey */
+                transition: all 0.3s ease;"
+        onmouseover="this.style.color='#1a1a1a'; this.style.textShadow='0 0 20px rgba(0,0,0,0.3)';"
+        onmouseout="this.style.color='#64748b'; this.style.textShadow='none';">
+        Dashboard
+        </a>
+
+        <!-- Separator Line (Optional) -->
+        <div style="width: 1px; height: 18px; background-color: #e2e8f0;"></div>
+
+        <!-- Logout Link -->
         <a href="{% url 'logout' %}" 
         style="text-decoration: none; 
                 font-family: 'Poppins', sans-serif; 
-                font-size: 0.85rem; 
+                font-size: 1rem; /* Medium Size */
                 font-weight: 500; 
-                color: #ef4444; /* Red Text */
-                border: 1px solid #ef4444; 
-                padding: 8px 24px; 
-                border-radius: 50px; 
-                display: inline-block; 
+                color: #64748b; /* Muted Grey */
                 transition: all 0.3s ease;"
-        onmouseover="this.style.backgroundColor='#ef4444'; this.style.color='#ffffff';"
-        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ef4444';">
+        onmouseover="this.style.color='#ef4444'; this.style.textShadow='0 0 15px rgba(239, 68, 68, 0.4)';"
+        onmouseout="this.style.color='#64748b'; this.style.textShadow='none';">
         LOGOUT
         </a>
-    </span>
+
+    </div>
         {% endif %}
 
     </div>
@@ -87,11 +106,7 @@
 
 {% endblock %}
 
-
-<!--FOOTER SECTION -->
-    {% comment %} <footer>
-        <p>Designed & Created by | Thahir Kacheri❤️</p>
-    </footer> {% endcomment %}
+    {% comment %} <Footer></Footer> {% endcomment %}
 
     <footer style="background: white; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 4rem; padding: 2rem 5%;">
     <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 1.5rem;">

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="dashboard-wrapper">
+    
+    {% include "dashboard/sidebar.html" %}
+
+    <main class="main-content">
+        
+        <header class="top-header">
+            <div class="header-text">
+                <p class="greeting">Welcome back,</p>
+                <h1 class="username">{{ user.username }}</h1> 
+            </div>
+            <div class="header-profile">
+                <div class="profile-circle">{{ user.username|slice:":1"|upper }}</div>
+            </div>
+        </header>
+
+        <section class="stats-container">
+            
+            <div class="stat-card">
+                <div class="card-icon blue">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div class="card-info">
+                    <span class="stat-label">Total Categories</span>
+                    <h2 class="stat-number"> {{category_count}} </h2>
+                    <span class="stat-indicator active">Active</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="card-icon green">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div class="card-info">
+                    <span class="stat-label">Published Posts</span>
+                    <h2 class="stat-number"> {{blogs_count}} </h2>
+                    <span class="stat-indicator live">Live</span>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+{% endblock %}

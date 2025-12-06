@@ -51,23 +51,12 @@
 
         <!-- Right Column: Sidebar -->
         <aside class="sidebar">
-            
-            <!-- Search Widget -->
-            <div class="sidebar-widget">
-                <h3>Search</h3>
-                <div class="search-box">
-                    <form method="GET" action="#"> <!-- Add your search URL here if needed -->
-                        <input type="text" placeholder="Enter search term..." aria-label="Search">
-                        <button type="submit" id="button-search">Go!</button>
-                    </form>
-                </div>
-            </div>
 
             <!-- Categories Widget -->
             <div class="sidebar-widget">
                 <h3>Categories</h3>
                 <ul class="trending-list">
-                    {% for cat in categories %}
+                    {% for cat in categories|slice:":6" %}
                     <li>
                         <span class="number">#</span>
                         <a href="{% url 'posts_by_category' cat.id %}">{{ cat.category_name }}</a>

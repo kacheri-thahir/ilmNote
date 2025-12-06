@@ -1,0 +1,32 @@
+   
+
+   
+   <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3>Dashboard</h3>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == '/dashboard/' %}active{% endif %}">
+                <i class="fa-solid fa-chart-line"></i> <span>Dashboard</span>
+            </a>
+            
+            {% comment %} {% if perms.auth.view_user %} {% endcomment %}
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-users"></i> <span>Users</span>
+            </a>
+            {% comment %} {% endif %} {% endcomment %}
+            
+            <a href="{% url "categories" %}" class="nav-link {% if '/categories/' in request.path %}active{% endif %}">
+                <i class="fa-solid fa-layer-group"></i> <span>Categories</span>
+            </a>
+            
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i> <span>Posts</span>
+            </a>
+            
+            <a href="#" class="nav-link logout-link">
+                <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+            </a>
+        </nav>
+    </aside>

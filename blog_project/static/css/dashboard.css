@@ -1,0 +1,701 @@
+/* --- Global Resets & Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* --- Layout Structure --- */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.sidebar-header h3 {
+    font-weight: 700;
+    color: #d946ef; /* Indigo brand color */
+    font-size: 1.25rem;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-link i {
+    width: 24px;
+    margin-right: 12px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+/* Active State Design */
+.nav-link.active {
+    background-color: #eef2ff;
+    color: #4f46e5;
+}
+
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.logout-link:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+/* Header */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.greeting {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.username {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    text-transform: capitalize;
+}
+
+.profile-circle {
+    width: 50px;
+    height: 50px;
+    background: #d946ef;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+/* --- Stats Grid --- */
+.stats-container {
+    display: grid;
+    /* Automatically fit as many columns as possible, min width 280px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-right: 1.25rem;
+}
+
+.card-icon.blue {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+.card-icon.green {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0.25rem 0;
+}
+
+.stat-indicator {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    width: fit-content;
+}
+
+.stat-indicator.active {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+.stat-indicator.live {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+    
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0;
+    }
+
+    .main-content {
+        padding: 1.5rem;
+    }
+    
+    .nav-link span {
+        font-size: 0.9rem;
+    }
+}
+
+/* categories (dashboard) */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Standard Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Primary Indigo Button */
+.btn-primary {
+    background-color: #4f46e5;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #4338ca;
+    box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3);
+}
+
+/* --- Content Card Container --- */
+/* This gives the table the same white box look as the stats cards */
+.content-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    overflow: hidden; /* Ensures table corners don't overflow the radius */
+}
+
+/* --- Styled Table --- */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 1rem 1.5rem;
+}
+
+/* Table Header Styling */
+.styled-table thead tr {
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.styled-table th {
+    color: #000000;
+    font-size: 0.81rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Table Body Styling */
+.styled-table tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover effect for table rows */
+.styled-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Keep the last border from doubling up with the card border */
+.styled-table tbody tr:last-of-type {
+    border-bottom: none;
+}
+
+/* Text Helpers inside table */
+.table-primary-text {
+    font-weight: 600;
+    color: #111827;
+}
+
+.text-muted {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+/* --- Action Icons --- */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.action-link {
+    color: #9ca3af;
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+
+.action-link.edit {
+    color: #1ebc36; /* Indigo hover */
+}
+
+.action-link.delete {
+    color: #dc2626; /* Red hover */
+}
+
+/* Empty State Helper */
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: #6b7280;
+}
+/* =========================================
+   Ultra-Modern Glass Toast Notification
+========================================= */
+
+#toast-container {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    pointer-events: none; /* Allows clicking through the empty space */
+}
+
+.glass-toast {
+    /* Glassmorphism Base */
+    background: rgba(255, 255, 255, 0.85); /* 85% opacity white */
+    backdrop-filter: blur(12px); /* The frosted glass blur */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    
+    /* Shape & Border */
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50px; /* Pill shape */
+    padding: 12px 24px 12px 12px; /* Extra padding on right for balance */
+    min-width: 300px;
+    
+    /* Depth */
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0,0,0,0.02); /* Subtle outline ring */
+
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden; /* Contains the shine */
+
+    /* Animation */
+    opacity: 0;
+    animation: floatInAndOut 4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+/* The Green Icon Circle */
+.toast-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(16, 185, 129, 0.4);
+    flex-shrink: 0;
+}
+
+/* Text Formatting */
+.toast-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.toast-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: #059669; /* Dark Green */
+    margin-bottom: 2px;
+}
+
+.toast-message {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1f2937;
+    white-space: nowrap;
+}
+
+/* --- The Luxury Shine Effect --- */
+.glass-toast::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: luxuryShine 3s infinite;
+}
+
+/* =========================================
+   Animations
+========================================= */
+
+/* Complex bounce-in and slide-out */
+@keyframes floatInAndOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    85% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+        visibility: hidden;
+    }
+}
+
+/* Shine movement */
+@keyframes luxuryShine {
+    0% { left: -150%; }
+    50% { left: 150%; } /* Fast shine */
+    100% { left: 150%; } /* Wait before repeating */
+}
+
+/* Add Category css */
+
+.form-wrapper {
+    max-width: 600px; /* Instead of inline style="width:500px" */
+    padding: 2rem;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.btn-back:hover {
+    color: #111827;
+}
+
+/* --- Form Group Spacing --- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Labels --- */
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151; /* Dark gray */
+}
+
+/* --- Inputs (Text, Password, Email, etc.) --- */
+/* We target the raw input tags generated by Django */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db; /* Light gray border */
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 0.95rem;
+    color: #111827;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+}
+
+/* Focus State (The Indigo Glow) */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4f46e5; /* Indigo */
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); /* Soft indigo ring */
+}
+
+/* Placeholder styling */
+.form-group input::placeholder {
+    color: #9ca3af;
+}
+
+/* --- Helper Text & Errors --- */
+.form-help {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.form-error {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #dc2626; /* Red */
+}
+
+/* --- Form Actions (Button positioning) --- */
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-start; /* Align left */
+}
+
+/* Override existing button to ensure it looks good in forms */
+.form-actions .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* Delete Conformation css */
+
+.confirm-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh; /* Takes up most of the screen */
+        background-color: #f8f9fa; /* Soft background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* The Card */
+    .confirm-box {
+        background: white;
+        width: 100%;
+        max-width: 420px;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* Soft, deep shadow */
+        text-align: center;
+        animation: popIn 0.3s ease-out forwards;
+    }
+
+    /* Warning Icon Circle */
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+        background-color: #fee2e2; /* Light Red */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px auto;
+        color: #dc2626; /* Dark Red */
+    }
+
+    .confirm-box h2 {
+        font-size: 24px;
+        color: #1f2937;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .confirm-box p {
+        color: #6b7280;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .confirm-box p strong {
+        color: #111827;
+        font-weight: 600;
+    }
+
+    /* Button Group */
+    .form-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    /* Delete Button Styling */
+    .delete-btn {
+        background-color: #ef4444;
+        color: white;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+
+    .delete-btn:hover {
+        background-color: #dc2626;
+        transform: translateY(-2px);
+    }
+
+    /* Cancel Button Styling */
+    .cancel-btn {
+        background-color: #f3f4f6;
+        color: #4b5563;
+    }
+
+    .cancel-btn:hover {
+        background-color: #e5e7eb;
+        color: #1f2937;
+    }
+
+    /* Simple Animation */
+    @keyframes popIn {
+        0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }

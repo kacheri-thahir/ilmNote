@@ -25,8 +25,10 @@ def posts_by_category(request,category_id):
 
 def blogs(request,slug):
     single_blog=get_object_or_404(Blog,slug=slug,status='Published')
+    random_categories = Category.objects.order_by('created_at')[:6]
     context={
-        'single_blog' : single_blog
+        'single_blog' : single_blog,
+        'random_categories' :random_categories,
     }
     return render(request,'blogs.html',context)
 

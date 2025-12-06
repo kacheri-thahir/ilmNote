@@ -159,23 +159,31 @@ a {
 /* --- Categories Strip --- */
 .category-strip {
     background: white;
-    padding: 1rem 5%;
+    /* CHANGED: Set left/right padding to 0 or a small fixed amount like 1rem */
+    padding: 1rem 0; 
     border-bottom: 1px solid rgba(0,0,0,0.05);
-    overflow-x: auto; /* Allows horizontal scrolling on mobile */
+    overflow-x: auto;
     white-space: nowrap;
-    -ms-overflow-style: none;  /* Hide scrollbar IE/Edge */
-    scrollbar-width: none;  /* Hide scrollbar Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-/* Hide scrollbar for Chrome/Safari */
 .category-strip::-webkit-scrollbar {
     display: none;
 }
 
 .category-list {
+    /* ADDED: These two lines remove the default browser gap */
+    padding: 0;
+    margin: 0;
+    
     list-style: none;
     display: inline-flex;
     gap: 2rem;
+    
+    /* Optional: Add a little breathing room just for the first item */
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .category-list a {
@@ -266,13 +274,15 @@ a {
     align-items: center;
     margin-bottom: 2.5rem;
     gap: 1rem;
+    flex-wrap: nowrap; /* Prevents the divider from pushing text to a new row */
 }
 
 .section-header h2 {
     font-family: var(--font-heading);
     font-size: 2rem;
+    white-space: nowrap; /* Forces text to stay on one line */
+    flex-shrink: 0;      /* Prevents text from being squished */
 }
-
 .divider {
     flex-grow: 1;
     height: 1px;
