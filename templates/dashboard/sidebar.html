@@ -11,11 +11,11 @@
                 <i class="fa-solid fa-chart-line"></i> <span>Dashboard</span>
             </a>
             
-            {% comment %} {% if perms.auth.view_user %} {% endcomment %}
-            <a href="#" class="nav-link">
+            {% if perms.auth.view_user %}    <!--It is used to view Users Sidebar on dashboard only for Managers not for Editors or others-->
+            <a href="{% url "users" %}" class="nav-link {% if '/users/' in request.path %}active{% endif %}" >
                 <i class="fa-solid fa-users"></i> <span>Users</span>
             </a>
-            {% comment %} {% endif %} {% endcomment %}
+            {% endif %}
             
             <a href="{% url "categories" %}" class="nav-link {% if '/categories/' in request.path %}active{% endif %}">
                 <i class="fa-solid fa-layer-group"></i> <span>Categories</span>

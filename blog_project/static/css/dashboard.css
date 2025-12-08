@@ -291,6 +291,7 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     border: 1px solid #f3f4f6;
     overflow: hidden; /* Ensures table corners don't overflow the radius */
+    overflow-x: auto;
 }
 
 /* --- Styled Table --- */
@@ -317,6 +318,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
 }
 
 /* Table Body Styling */

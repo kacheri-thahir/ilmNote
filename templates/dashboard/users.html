@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="dashboard-wrapper">
+    
+    {% include 'dashboard/sidebar.html' %}
+
+    <main class="main-content">
+        
+        {% if perms.auth.view_user %}
+        <header class="page-header">
+            <h2>All Users</h2>
+            <a href="{% url "add_user" %}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Add New User
+            </a>
+        </header>
+
+        
+        {% if messages %}
+            <div id="toast-container">
+                {% for message in messages %}
+                <div class="glass-toast">
+                    <div class="toast-icon">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="toast-content">
+                        <span class="toast-title">Successfully</span>
+                        <span class="toast-message">{{ message }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            
+            <div class="content-card">
+                
+                <div style="overflow-x: auto;">
+                    <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Is Active</th>
+                            <th>Staff</th>
+                            <th>SuperUser</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ user.first_name }} {{ user.last_name }} </td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td class="icon-cell"> {% if user.is_active %}<i class="fa-regular fa-circle-check" style="color: green;"></i>{% else %}<i class="fa-regular fa-circle-xmark" style="color: red;"></i>{% endif %} </td>
+                            <td class="icon-cell"> {% if user.is_staff  %}<i class="fa-regular fa-circle-check" style="color: green;">{% else %}<i class="fa-regular fa-circle-xmark" style="color: red;"></i>{% endif %} </td>
+                            <td class="icon-cell"> {% if user.is_superuser %}<i class="fa-regular fa-circle-check" style="color: green;">{% else %}<i class="fa-regular fa-circle-xmark" style="color: red;"></i>{% endif %} </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{% url "edit_user" user.pk  %}" class="action-links edit" title="Edit">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    &nbsp;
+                                    <a href="{% url "delete_user" user.pk %}" class="action-links delete" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if not categories %}
+            <div class="empty-state">
+                <p>No categories found.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        {% else %}
+        <h5>You Dont Have Permission To Access This Page!</h5>
+        {% endif %}
+    </main>
+</div>
+
+{% endblock %}
