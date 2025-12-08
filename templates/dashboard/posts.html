@@ -14,8 +14,8 @@
     <main class="main-content">
         
         <header class="page-header">
-            <h2>All Categories</h2>
-            <a href="{% url "add_categories" %}" class="btn btn-primary">
+            <h2>All Posts</h2>
+            <a href="{% url "add_posts" %}" class="btn btn-primary">
                 <i class="fa-solid fa-plus"></i> Add New
             </a>
         </header>
@@ -44,28 +44,30 @@
                 <thead>
                     <tr>
                         <th>S.No</th>
-                        <th>Category Name</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
+                        <th>title</th>
+                        <th>category</th>
+                        <th>author</th>
+                        <th>status</th>
+                        <th>Featured</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for cat in categories %}
+                    {% for post in posts %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>
-                            <span class="table-primary-text">{{ cat.category_name }}</span>
-                        </td>
-                        <td class="text-muted">{{ cat.created_at | date:"M d Y,  h:i A" }}</td>
-                        <td class="text-muted">{{ cat.updated_at | date:"M d Y,  h:i A" }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.category }}</td>
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.status }}</td>
+                        <td class="icon-cell">{% if post.is_featured %}<i class="fa-regular fa-circle-check" style="color: green;"></i>{% else %}<i class="fa-regular fa-circle-xmark" style="color: red;"></i>{% endif %}</td>
                         <td>
                             <div class="action-buttons">
-                                <a href="{% url "edit_categories" cat.pk %}" class="action-links edit" title="Edit">
+                                <a href="{% url "edit_post" post.pk %}" class="action-links edit" title="Edit">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
                                 &nbsp;
-                                <a href="{% url "delete_categories" cat.pk %}" class="action-links delete" title="Delete">
+                                <a href="{% url "delete_post" post.pk %}" class="action-links delete" title="Delete">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </a>
                             </div>

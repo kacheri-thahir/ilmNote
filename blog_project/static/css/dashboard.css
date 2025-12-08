@@ -40,7 +40,7 @@ body {
 
 .sidebar-header h3 {
     font-weight: 700;
-    color: #d946ef; /* Indigo brand color */
+    color: #4f46e5; /* Indigo brand color */
     font-size: 1.25rem;
 }
 
@@ -57,7 +57,7 @@ body {
     align-items: center;
     padding: 0.75rem 1rem;
     text-decoration: none;
-    color: #4b5563;
+    color: #000000;
     font-weight: 500;
     border-radius: 8px;
     transition: all 0.2s ease;
@@ -71,7 +71,7 @@ body {
 
 .nav-link:hover {
     background-color: #f3f4f6;
-    color: #111827;
+    color: #4f46e5;
 }
 
 /* Active State Design */
@@ -121,7 +121,7 @@ body {
 .profile-circle {
     width: 50px;
     height: 50px;
-    background: #d946ef;
+    background: #4f46e5;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -169,7 +169,7 @@ body {
 
 .card-icon.blue {
     background-color: #e0e7ff;
-    color: #4338ca;
+    color: #000000;
 }
 
 .card-icon.green {
@@ -313,8 +313,8 @@ body {
 
 .styled-table th {
     color: #000000;
-    font-size: 0.81rem;
-    font-weight: 600;
+    font-size: 0.82rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -337,7 +337,7 @@ body {
 
 /* Text Helpers inside table */
 .table-primary-text {
-    font-weight: 600;
+    font-weight: 500;
     color: #111827;
 }
 
@@ -359,11 +359,11 @@ body {
     display: inline-block;
 }
 
-.action-link.edit {
+.action-links.edit {
     color: #1ebc36; /* Indigo hover */
 }
 
-.action-link.delete {
+.action-links.delete {
     color: #dc2626; /* Red hover */
 }
 
@@ -699,3 +699,390 @@ body {
         0% { opacity: 0; transform: scale(0.95) translateY(10px); }
         100% { opacity: 1; transform: scale(1) translateY(0); }
     }
+
+
+/* Add Posts CSS */
+
+/* =========================================
+   1. Google Fonts & Variables
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+:root {
+    --primary-colors: #6366f1; /* Indigo */
+    --primary-hovers: #4f46e5;
+    --secondary-color: #ec4899; /* Pink/Rose */
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================
+   2. Layout Structure
+   ========================================= */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+/* =========================================
+   3. Page Header (Fixed for BOTH pages)
+   ========================================= */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensures buttons align with text */
+    margin-bottom: 2.5rem;
+}
+
+/* Updated Selector: Targets H2 in simple headers AND complex headers */
+.page-header h2, 
+.header-text h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.header-text .text-muted {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Primary Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-colors), var(--secondary-color));
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    line-height: 1; /* Fixes alignment issues */
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.5);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: white;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.btn-secondary:hover {
+    background-color: #f9fafb;
+    border-color: #000;
+    color: #000;
+}
+
+/* =========================================
+   4. Glass Toast Notifications
+   ========================================= */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.glass-toast {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    min-width: 300px;
+    animation: slideIn 0.4s ease forwards;
+}
+
+.toast-icon {
+    background: var(--success-color);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 0.8rem;
+}
+
+.toast-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.toast-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.toast-message {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* =========================================
+   5. Card Containers (Table & Form)
+   ========================================= */
+.content-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    overflow: hidden; 
+}
+
+.form-wrapper {
+    padding: 2.5rem;
+    max-width: 800px;
+    margin-bottom: 3rem;
+}
+
+
+/* Status Badges */
+td:nth-child(5) .table-primary-text, 
+td:nth-child(6) .table-primary-text {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #e0e7ff; 
+    color: var(--primary-colors);
+    text-transform: capitalize;
+}
+
+/* Action Icons */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-link {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.action-link.edit { color: #3b82f6; background-color: rgba(59, 130, 246, 0.1); }
+.action-link.edit:hover { background-color: #3b82f6; color: white; }
+
+.action-link.delete { color: #ef4444; background-color: rgba(239, 68, 68, 0.1); }
+.action-link.delete:hover { background-color: #ef4444; color: white; }
+
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   7. Form Styling (Add Post)
+   ========================================= */
+
+/* Container logic to stack label above input */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Django outputs paragraphs for .as_p, we handle them here */
+.input-container p {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-container label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+/* --- INPUT STYLING --- */
+.input-container input[type="text"],
+.input-container input[type="email"],
+.input-container input[type="password"],
+.input-container input[type="url"],
+.input-container input[type="number"],
+.input-container input[type="file"],
+.input-container select,
+.input-container textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background-color: #f9fafb; 
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Focus: Black Border, No Glow */
+.input-container input:focus,
+.input-container select:focus,
+.input-container textarea:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #000000; 
+    box-shadow: none; 
+}
+
+/* --- SMALL TEXTAREAS --- */
+.input-container textarea {
+    height: 50px !important;
+    min-height: 50px !important;
+    padding: 0.85rem 1rem;
+    resize: vertical;
+    overflow-y: hidden; 
+}
+
+/* Optional: Make body slightly larger if needed, remove if you want all small */
+#id_blog_body {
+    height: 80px !important;
+    min-height: 80px !important;
+}
+
+/* File Input */
+.input-container input[type="file"] {
+    background: white;
+    padding: 0.5rem;
+    border: 1px dashed var(--border-color);
+}
+.input-container input[type="file"]::file-selector-button {
+    margin-right: 1rem;
+    background: #f3f4f6;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Checkboxes */
+.input-container input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--primary-colors);
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.input-container label[for*="checkbox"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+/* Error Messages */
+.form-error {
+    margin-top: 1.5rem;
+    background-color: #fef2f2;
+    border: 1px solid #fee2e2;
+    border-radius: var(--radius-md);
+    padding: 1rem;
+}
+.form-error span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Unified Button Size in Forms */
+.form-actions .btn-primary {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+}
+
+/* Posts Featured Field Symbols Css  */
+.icon-cell {
+    text-align: center;
+    vertical-align: middle;
+}

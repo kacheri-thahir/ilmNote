@@ -157,7 +157,7 @@ a {
 }
 
 /* --- Categories Strip --- */
-.category-strip {
+.home-category-strip {
     background: white;
     /* CHANGED: Set left/right padding to 0 or a small fixed amount like 1rem */
     padding: 1rem 0; 
@@ -168,11 +168,11 @@ a {
     scrollbar-width: none;
 }
 
-.category-strip::-webkit-scrollbar {
+.home-category-strip::-webkit-scrollbar {
     display: none;
 }
 
-.category-list {
+.home-category-list {
     /* ADDED: These two lines remove the default browser gap */
     padding: 0;
     margin: 0;
@@ -186,19 +186,19 @@ a {
     padding-right: 1rem;
 }
 
-.category-list a {
+.home-category-list a {
     color: var(--text-muted);
     font-weight: 500;
     font-size: 0.95rem;
     position: relative;
 }
 
-.category-list a:hover, .category-list a.active {
+.home-category-list a:hover, .category-list a.active {
     color: var(--primary-color);
 }
 
 /* Underline animation for categories */
-.category-list a::after {
+.home-category-list a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -209,7 +209,7 @@ a {
     transition: width 0.3s;
 }
 
-.category-list a:hover::after {
+.home-category-list a:hover::after {
     width: 100%;
 }
 

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="dashboard-wrapper">
+    
+{% include 'dashboard/sidebar.html' %}
+
+    <main class="main-content">
+        
+        <header class="page-header">
+            <div class="header-text">
+                <h2>Edit Post</h2>
+                <p class="text-muted">Edit your Post.</p>
+            </div>
+            <a href="{% url 'posts' %}" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Back to List
+            </a>
+        </header>
+        
+        <div class="content-card form-wrapper">
+            
+            <form action="{% url 'edit_post' post.pk %}" method="POST" enctype="multipart/form-data" novalidate>   <!--Added enctype here because form is accepting media like photo-->
+                {% csrf_token %}
+                    
+                <div class="input-container">
+                    {{ form.as_p }}
+                </div>
+
+                {% if form.errors %}
+                <div class="form-error">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <span><i class="fa-solid fa-circle-exclamation"></i> {{ field.label }}: {{ error }}</span>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <span><i class="fa-solid fa-circle-exclamation"></i> {{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div> </main>
+</div>
+
+{% endblock %}
