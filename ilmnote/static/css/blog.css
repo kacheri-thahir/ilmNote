@@ -108,52 +108,140 @@ a {
     color: #d946ef; /* Accent color on hover */
 }
 
-/* --- Auth Buttons (Right) --- */
-/* --- Container --- */
-.auth-buttons {
+/* ============================
+   Sidebar (Sidenav) Styles (3lines)
+   ============================ */
+.sidenav {
+    height: 100%;
+    width: 0; /* Initially hidden */
+    position: fixed;
+    z-index: 2000; /* Sit on top of everything */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Dark background like Amazon */
+    overflow-x: hidden;
+    transition: 0.3s; /* Smooth slide effect */
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+}
+
+.sidenav a {
+    padding: 10px 15px 10px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.sidenav-header {
+    padding: 0 32px 20px 32px;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.sidenav-divider {
+    border-color: #333;
+    margin: 10px 0;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+
+/* ============================
+   Navbar Adjustments (3 lines)
+   ============================ */
+.navbar.amazon-nav {
     display: flex;
-    gap: 0.8rem; /* Tighter gap between buttons */
+    justify-content: flex-start; /* Align left instead of space-between */
+    gap: 30px;
+    padding: 1rem 5%; /* Keep your original padding */
     align-items: center;
 }
 
-/* --- Small & Aesthetic Button Shared Style --- */
-.auth-buttons a {
-    text-decoration: none;
-    /* Smaller padding for a compact look */
-    padding: 0.35rem 1.1rem; 
-    border-radius: 50px;
-    font-family: 'Poppins', sans-serif;
-    /* Smaller text size */
-    font-size: 0.75rem;     
-    font-weight: 600;
-    /* Letter spacing keeps it readable and stylish */
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    border: 1px solid; /* Thinner border looks better small */
+.nav-left-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between hamburger and logo */
 }
 
-/* --- 1. Log In (Black Theme) --- */
-.btn-login {
+.hamburger-icon {
+    font-size: 24px; 
+    cursor: pointer; 
     color: #1a1a1a;
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure Search bar takes up remaining space nicely */
+.search-container {
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+/* ============================
+   Footer Styles (Cleaned up)
+   ============================ */
+.main-footer {
+    background: white;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    margin-top: 4rem;
+    padding: 2rem 5%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.credit-text {
+    color: #64748b;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.credit-text span {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.footer-about-btn {
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    padding: 8px 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.footer-about-btn:hover {
+    background: #1a1a1a;
+    color: white;
     border-color: #1a1a1a;
-    background: transparent;
-}
-
-.btn-login:hover {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
-/* --- 2. Register (Magenta Theme) --- */
-.btn-register {
-    color: #d946ef;
-    border-color: #d946ef;
-    background: transparent;
-}
-
-.btn-register:hover {
-    background-color: #d946ef;
-    color: #ffffff;
 }
 
 /* --- Categories Strip --- */
@@ -877,6 +965,7 @@ footer {
 
 .social-list a:hover {
     background: #000001;
+    color: #fff;
 }
 
 /* Responsive */
@@ -1015,7 +1104,7 @@ footer {
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
-    color: #334155;
+    color: #000000;     /* Title color */
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     line-height: 1.5;
@@ -1069,6 +1158,161 @@ footer {
 }
 
 
+/* =========================================
+   ADD THIS TO THE BOTTOM OF YOUR CSS FILE
+   Horizontal Scroll & Home Layout
+   ========================================= */
 
+/* 1. Container for the whole home page content */
+.home-container {
+    max-width: 1200px;
+    margin: 2rem auto; /* Centers the container */
+    padding: 0 5%;     /* Adds side spacing */
+}
+
+/* 2. Section Headers (Featured/Recent Titles) */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-top: 10px;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+/* 3. The Horizontal Scroll Container (The "Rail") */
+.horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;      /* Enables side scrolling */
+    gap: 20px;             /* Space between cards */
+    padding: 10px 5px 25px 5px; /* Padding for shadow/scrollbars */
+    scroll-snap-type: x mandatory; /* Makes cards snap into place */
+    
+    /* Scrollbar Styling */
+    scrollbar-width: thin;          /* For Firefox */
+    scrollbar-color: #ccc #f1f1f1;  /* For Firefox */
+}
+
+/* Chrome/Safari/Edge Scrollbar Styling */
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 8px; /* Height of the horizontal scrollbar */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 4px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 4px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #999; 
+}
+
+/* 4. The Individual Cards */
+.scroll-card {
+    flex: 0 0 auto;       /* Prevents card from shrinking */
+    width: 280px;         /* Fixed width is crucial for horizontal rows */
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    scroll-snap-align: start; /* Snap alignment */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll-card:hover {
+    transform: translateY(-5px); /* Lifts up slightly on hover */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Card Image Area */
+.scroll-card .card-image {
+    height: 160px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scroll-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills the box without stretching */
+    transition: transform 0.3s ease;
+}
+
+.scroll-card:hover .card-image img {
+    transform: scale(1.05); /* Zoom effect on hover */
+}
+
+/* Card Text Content */
+.scroll-card .card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.scroll-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.scroll-card a {
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: color 0.2s;
+}
+
+.scroll-card a:hover {
+    color: #2563eb; /* Blue highlight on hover */
+}
+
+.scroll-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+}
+
+.scroll-card .card-footer {
+    margin-top: auto; /* Pushes footer to bottom */
+    font-size: 0.75rem;
+    color: #888;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+}
+
+/* Update hover color for Scroll Card Titles */
+.scroll-card a:hover h4,
+.scroll-card a:hover {
+    color: #d946ef !important; /* Forces the pink shine color */
+    transition: color 0.3s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .scroll-card {
+        width: 240px; /* Slightly smaller cards on phones */
+    }
+    .scroll-card .card-image {
+        height: 140px;
+    }
+}
 
 
