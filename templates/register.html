@@ -1,9 +1,10 @@
 {% extends "base_auth.html" %}
+{% load static %}
 
 {% block content %}
 
 <!-- Link the specific CSS -->
-<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
 <div class="auth-wrapper">
     <div class="auth-card">

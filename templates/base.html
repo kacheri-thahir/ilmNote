@@ -17,14 +17,8 @@
 </head>
 <body>
 
-    {% comment %} <nav class="navbar">
-        <div class="brand">Ilm Note.</div>
-        <div class="auth-buttons">
-            <a href="#" class="btn-login">Log In</a>
-            <a href="#" class="btn-register">Register</a>
-        </div>
-    </nav> {% endcomment %}
 
+    
 
     <nav class="navbar">
     <!-- Left: Brand -->
@@ -57,6 +51,8 @@
         <div style="display: flex; align-items: center; gap: 25px;">
     
     <!-- Dashboard Link -->
+        {% if request.user.is_authenticated and request.user.is_staff %}    <!--Showing only Dashboard button to staff members but not for normal users-->
+
         <a href="{% url "dashboard" %}" 
         style="text-decoration: none; 
                 font-family: 'Poppins', sans-serif; 
@@ -68,9 +64,11 @@
         onmouseout="this.style.color='#64748b'; this.style.textShadow='none';">
         Dashboard
         </a>
-
+        
         <!-- Separator Line (Optional) -->
         <div style="width: 1px; height: 18px; background-color: #e2e8f0;"></div>
+
+        {% endif %}
 
         <!-- Logout Link -->
         <a href="{% url 'logout' %}" 

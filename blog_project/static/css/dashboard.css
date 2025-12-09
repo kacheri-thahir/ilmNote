@@ -375,6 +375,7 @@ body {
     text-align: center;
     color: #6b7280;
 }
+
 /* =========================================
    Ultra-Modern Glass Toast Notification
 ========================================= */
@@ -390,35 +391,37 @@ body {
     gap: 15px;
     pointer-events: none; /* Allows clicking through the empty space */
 }
-
+/* Update this class in your dashboard.css */
 .glass-toast {
-    /* Glassmorphism Base */
-    background: rgba(255, 255, 255, 0.85); /* 85% opacity white */
-    backdrop-filter: blur(12px); /* The frosted glass blur */
-    -webkit-backdrop-filter: blur(12px); /* Safari support */
-    
-    /* Shape & Border */
+    /* ... keep your background, backdrop-filter, border, etc ... */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 50px; /* Pill shape */
-    padding: 12px 24px 12px 12px; /* Extra padding on right for balance */
+    border-radius: 50px;
+    padding: 12px 24px 12px 12px;
     min-width: 300px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     
-    /* Depth */
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.05),
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(0,0,0,0.02); /* Subtle outline ring */
-
-    /* Layout */
     display: flex;
     align-items: center;
     gap: 15px;
-    position: relative;
-    overflow: hidden; /* Contains the shine */
+    
+    /* CRITICAL CHANGE: Use a simple slideIn animation only */
+    opacity: 0; 
+    animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
 
-    /* Animation */
-    opacity: 0;
-    animation: floatInAndOut 4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+/* Add this simple entrance animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* The Green Icon Circle */
@@ -508,6 +511,8 @@ body {
     50% { left: 150%; } /* Fast shine */
     100% { left: 150%; } /* Wait before repeating */
 }
+
+
 
 /* Add Category css */
 

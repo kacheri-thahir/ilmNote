@@ -1,2 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
 
-<p> Page Not Found 🙃 </p>
+    <style>
+        /* --- CSS VARIABLES (Your Theme) --- */
+        :root {
+            --theme-white: #ffffff;
+            --theme-black: #111111;
+            --theme-purple: #8b5cf6; /* A vibrant, modern purple */
+            --theme-purple-soft: #ddd6fe; /* Light lavender for background blobs */
+            --text-muted: #6b7280;
+            --font-main: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--theme-white);
+            color: var(--theme-black);
+            font-family: var(--font-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- SUBTLE BACKGROUND BLOBS --- */
+        /* Adds depth without cluttering the white theme */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            z-index: -1;
+            background: var(--theme-purple-soft);
+        }
+        .blob-1 { width: 500px; height: 500px; top: -20%; right: -10%; }
+        .blob-2 { width: 300px; height: 300px; bottom: -10%; left: -10%; background: #ede9fe; }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            display: flex;
+            flex-direction: column-reverse; /* Image on top for mobile */
+            align-items: center;
+            gap: 2rem;
+            max-width: 1100px;
+            width: 90%;
+            padding: 2rem;
+            /* Clean white card with soft purple shadow */
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px -15px rgba(139, 92, 246, 0.15);
+        }
+
+        /* --- TYPOGRAPHY AREA --- */
+        .text-content {
+            text-align: center;
+            flex: 1;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        h1 {
+            font-size: 10rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            /* Gradient text: Purple to Black */
+            background: linear-gradient(135deg, var(--theme-purple), var(--theme-black));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -4px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--theme-black);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 450px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* --- ANIMATED IMAGE AREA --- */
+        .image-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .anim-container {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(139, 92, 246, 0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .anim-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* --- BUTTON --- */
+        .btn-purple {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            background: var(--theme-purple);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-purple:hover {
+            background: var(--theme-black);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0, 0.3);
+        }
+
+        /* --- DESKTOP LAYOUT (Side by Side) --- */
+        @media (min-width: 900px) {
+            .container {
+                flex-direction: row;
+                padding: 4rem;
+                text-align: left;
+            }
+            .text-content {
+                text-align: left;
+            }
+            h1 { font-size: 12rem; }
+            p { margin: 0 0 2.5rem 0; }
+            .image-content {
+                justify-content: flex-end;
+            }
+        }
+
+        /* --- KEYFRAME ANIMATIONS --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="container">
+        <div class="text-content">
+            <h1>404</h1>
+            <h2>Ooops! You're lost.</h2>
+            <p>We couldn't find the page you were looking for.</p>
+            <a href="{% url "home" %}" class="btn-purple">Go Back Home</a>
+        </div>
+
+        <div class="image-content">
+            <div class="anim-container">
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaThweHJ4ano1aG14Z2c2emh4a2M0bGR4ODc4aG5uM3F6ZWg4Z3BkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l3vQY9arN5wsqh6wg/giphy.gif" alt="Animated Boy Lost in Space">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

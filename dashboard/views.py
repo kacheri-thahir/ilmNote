@@ -5,12 +5,29 @@ from .forms import CategoryForm,BlogForm,AddUserForm,EditUserForm
 from django.contrib import messages
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.http import Http404
 
 # Create your views here.
 
+# creating one function staff_only decorator to access dashboard only for staff members not for normal users put @staff_only to all views which only staff access. If any users cracks urls for dashboard and cleverly goes to access it django throws 404 error
+def staff_only(view_func):
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        if not request.user.is_staff:
+            raise Http404
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
+
+
 # Dashboard field
 @login_required(login_url='login')
+@staff_only
 def dashboard(request):
+    if not request.user.is_staff:
+        raise Http404
+
     category_count=Category.objects.all().count()
     blogs_count=Blog.objects.all().count()
     context={
@@ -20,10 +37,12 @@ def dashboard(request):
     return render(request,'dashboard/dashboard.html',context)
 # ---------------------------------------------------
 # Dashboard Categories field
+@staff_only
 def categories(request):
     return render(request,'dashboard/categories.html')
 
 # add categories
+@staff_only
 def add_categories(request):
     if request.method=='POST':
         form=CategoryForm(request.POST)
@@ -40,7 +59,7 @@ def add_categories(request):
     return render(request,'dashboard/add_categories.html',context)
 
 # Edit Categories
-
+@staff_only
 def edit_categories(request,pk):
     category=get_object_or_404(Category,pk=pk)
     if request.method=='POST':
@@ -57,7 +76,7 @@ def edit_categories(request,pk):
     return render(request,'dashboard/edit_categories.html',context)
 
 # Delete Category
-
+@staff_only
 def delete_categories(request,pk):
     category=get_object_or_404(Category,pk=pk)
     if request.method == "POST":
@@ -67,6 +86,7 @@ def delete_categories(request,pk):
     return render(request, "dashboard/delete_category_confirm.html", {"category": category})
 # ----------------------------------------------------------------
 # Posts Dashboard 
+@staff_only
 def posts(request):
     posts=Blog.objects.all()
     context={
@@ -75,6 +95,7 @@ def posts(request):
     return render(request,'dashboard/posts.html',context)
 
 # add posts
+@staff_only
 def add_posts(request):
     if request.method=='POST':
         form=BlogForm(request.POST,request.FILES)   #request.FILES is used here because form is accepting media like photo here 
@@ -85,6 +106,7 @@ def add_posts(request):
             title=form.cleaned_data['title']        #we need to add slug field so here we import title from Blog field
             post.slug=slugify(title)  + '-' + str(post.id)           #this line adds automatic slug field with primary key if two posts have same name (so, test and suppost we have added another post with same name like test for it it will be added primary key test-1 so both are different)
             post.save()                                #save the post after filling slug field
+            messages.success(request, "Post created.")
             return redirect('posts')
         else:
             form.errors
@@ -96,7 +118,7 @@ def add_posts(request):
     return render(request,'dashboard/add_posts.html',context)
 
 # Edit Posts
-
+@staff_only
 def edit_post(request,pk):
     post=get_object_or_404(Blog,pk=pk)
     if request.method=='POST':
@@ -116,7 +138,7 @@ def edit_post(request,pk):
     return render(request,'dashboard/edit_post.html',context)
 
 # Delete Post
-
+@staff_only
 def delete_post(request,pk):
     post=get_object_or_404(Blog,pk=pk)
     if request.method == 'POST':
@@ -127,7 +149,7 @@ def delete_post(request,pk):
 # -----------------------------------------------------
 
 # Dashboard Users Field
-
+@staff_only
 def users(request):
     users=User.objects.all()
     context={
@@ -136,7 +158,7 @@ def users(request):
     return render(request,'dashboard/users.html',context)
 
 # Add Users
-
+@staff_only
 def add_user(request):
     if request.method=='POST':
         form=AddUserForm(request.POST)
@@ -152,7 +174,7 @@ def add_user(request):
     return render(request,'dashboard/add_user.html',context)
 
 # Edit User
-
+@staff_only
 def edit_user(request,pk):
     user=get_object_or_404(User,pk=pk)
     if request.method=='POST':
@@ -167,7 +189,7 @@ def edit_user(request,pk):
     return render(request,'dashboard/edit_user.html',context)
 
 # Delete User
-
+@staff_only
 def delete_user(request,pk):
     user=get_object_or_404(User,pk=pk)
     if request.method == 'POST':

@@ -1,8 +1,9 @@
 {% extends "base_auth.html" %}
+{% load static %}
 
 {% block styles %}
     <!-- Link to the specific login CSS -->
-    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -34,3 +35,4 @@
 </div>
 
 {% endblock %}
+
