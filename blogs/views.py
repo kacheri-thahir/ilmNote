@@ -1,6 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect,get_object_or_404
-from . models import Blog,Category
+from . models import Blog,Category,Comment
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def posts_by_category(request,category_id):
@@ -25,10 +28,28 @@ def posts_by_category(request,category_id):
 
 def blogs(request,slug):
     single_blog=get_object_or_404(Blog,slug=slug,status='Published')
-    random_categories = Category.objects.order_by('created_at')[:6]
+    random_categories = Category.objects.order_by('created_at')[:6]     #to display any 6 categories in single blog page
+    # Comments
+    comments=Comment.objects.filter(blog=single_blog)
+    comment_count=comments.count()
+
+    # Comment form                                         #Actually we need to create form to add comments here blogs is the only field which is accepting slug so we created form directly here..
+    if request.method=='POST':
+        if not request.user.is_authenticated:
+            # Redirect user to login page and come back after login
+            return redirect('login')
+        comment=Comment()
+        comment.user=request.user           #user,blog,comment comes from Comment model.
+        comment.blog=single_blog
+        comment.comment=request.POST['comment']    #['comment'] comes from name="comment" field from blogs.html comment section textarea name field.  
+        comment.save()
+        return HttpResponseRedirect(request.path_info)  #HttpResponseRedirect(request.path_info) is used to redirect user to that particular form the form which user commented.
+
     context={
         'single_blog' : single_blog,
         'random_categories' :random_categories,
+        'comments' : comments,
+        'comment_count' : comment_count,
     }
     return render(request,'blogs.html',context)
 

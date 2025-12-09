@@ -35,12 +35,12 @@ body {
 
 .sidebar-header {
     padding: 2rem 1.5rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid #000000;
 }
 
 .sidebar-header h3 {
     font-weight: 700;
-    color: #4f46e5; /* Indigo brand color */
+    color: black; /* Indigo brand color */
     font-size: 1.25rem;
 }
 

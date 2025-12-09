@@ -47,7 +47,50 @@
             <div class="blog-text">
                 {{ single_blog.blog_body|linebreaks }}
             </div>
+
+             <section class="comments-section">
+                <div class="comments-header">
+                    <h3>Discussion ({{ comment_count }})</h3>
+                </div>
+
+
+                 <!--Comments Section-->
+                <div class="comment-form-wrapper">
+                    <form method="POST" action=""> 
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea name="comment" class="aesthetic-input" placeholder="What are your thoughts?" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-comment">Post Comment</button>
+                    </form>
+                </div>
+
+                <div class="comments-list">
+                    {% for comment in comments %}
+                    <div class="comment-card">
+                        <div class="comment-avatar">
+                            <span>{{ comment.user.username|slice:":1" }}</span>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-meta">
+                                <span class="comment-author">{{ comment.user }}</span>
+                                <span class="comment-date">{{ comment.created_at|date:"M d, Y" }}</span>
+                            </div>
+                            <p class="comment-text">{{ comment }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="no-comments">
+                        <p>No comments yet. Be the first to share your thoughts!</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+
         </div>
+
+
 
         <!-- Right Column: Sidebar -->
         <aside class="sidebar">
