@@ -7,8 +7,8 @@
         <header class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('{{ post.featured_image.url }}');">
             <div class="hero-content">
                 <span class="tag">Featured Story</span>
-                <h1>{{ post.title }}</h1>
-                <p>{{ post.short_description }}</p>
+                <h1>{{ post.title |truncatechars:40 }}</h1>
+                <p>{{ post.short_description |truncatewords:10 }}</p>
                 <a href="{% url "blogs" post.slug %}" class="read-more">Read Article &rarr;</a>
             </div>
         </header>
@@ -28,7 +28,7 @@
                         {% if post.featured_image %}
                             <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                         {% else %}
-                            <img src="https://via.placeholder.com/300x200" alt="No Image">
+                            <img src="{{ MEDIA_URL }}ilmnote_default_image.png" alt="ilmnote_default_image">
                         {% endif %}
                     </div>
                     
@@ -60,6 +60,8 @@
                 <div class="card-image">
                     {% if post.featured_image %}
                         <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    {% else %}
+                        <img src="{{ MEDIA_URL }}ilmnote_default_image.png" alt="ilmnote_default_image">  <!-- Default image if no image uploaded -->
                     {% endif %}
                 </div>
                 

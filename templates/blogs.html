@@ -12,7 +12,7 @@
     <header class="article-header">
         <div class="article-meta">
             <!-- Category -->
-            <a href="#!" class="category-tag">{{ single_blog.category }}</a>
+            <a href="{% url "posts_by_category"  single_blog.category.id  %}" class="category-tag">{{ single_blog.category }}</a>
             <!-- Date -->
             <span class="read-time">{{ single_blog.created_at|date:"M d, Y" }}</span>
         </div>
@@ -23,7 +23,7 @@
         <!-- Author Meta -->
         <div class="author-meta">
             <div class="author-details">
-                <span class="author-name">By {{ single_blog.author }}</span>
+                <span class="author-name">By <!--{{ single_blog.author }}--> <span></span>ilmNote.</span>
             </div>
         </div>
     </header>

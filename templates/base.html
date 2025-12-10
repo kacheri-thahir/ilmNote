@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilm Note</title>
+    <title>ilm Note</title>
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
         <div class="nav-left-group">
             <span class="hamburger-icon" onclick="openNav()">&#9776;</span>
             <div class="brand">
-                <a href="/">Ilm Note.</a>
+                <a href="/">ilm Note.</a>
             </div>
         </div>
 
@@ -62,13 +62,20 @@
         
     </nav>
 
+
     <div class="home-category-strip">
-        <ul class="home-category-list">
-            {% for cat in categories %}                             
-                <li><a href="{% url 'posts_by_category' cat.id %}">{{ cat.category_name }}</a></li>
-            {% endfor %}
-        </ul>
+    <ul class="home-category-list">
+        {% for cat in categories %}
+            <li>
+                <a href="{% url 'posts_by_category' cat.id %}" 
+                   class="{% if cat.id|stringformat:'s' == request.resolver_match.kwargs.category_id|stringformat:'s' %}active{% endif %}">
+                    {{ cat.category_name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
     </div>
+        
 
     {% block content %}
     {% endblock %}
