@@ -85,8 +85,8 @@ a {
 .search-container input:focus {
     outline: none;
     background-color: #ffffff;
-    border-color: #d946ef; /* Your Magenta Accent */
-    box-shadow: 0 4px 12px rgba(217, 70, 239, 0.1);
+    border-color: #000000; /* Your Magenta Accent */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Search Button (Icon) */
@@ -105,8 +105,27 @@ a {
 }
 
 .search-container button:hover {
-    color: #d946ef; /* Accent color on hover */
+    color: #000000; /* Accent color on hover */
 }
+
+/* --- Mobile Fix --- */
+@media screen and (max-width: 768px) {
+    .brand {
+        /* Reduce font size for mobile */
+        font-size: 1.2rem; 
+        /* Optional: prevents logo from breaking onto two lines */
+        white-space: nowrap; 
+    }
+
+    .search-container {
+        /* Adds a safe gap between the logo and search bar */
+        margin-left: 15px; 
+        
+        /* Ensures the search bar doesn't force itself too wide */
+        width: 100%; 
+    }
+}
+
 
 /* ============================
    Sidebar (Sidenav) Styles (3lines)
@@ -883,7 +902,7 @@ footer {
 /* Main container */
 /* Parent container */
 .about-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 30px 20px;
     font-family: "Poppins", sans-serif;
@@ -896,12 +915,13 @@ footer {
 }
 
 .about-header h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 700;
     font-family: "Playfair Display", serif;
     color: #000;
     letter-spacing: -0.5px;
     line-height: 1.15;
+    padding-bottom: 30px;
 }
 
 /* Full-width hero image */
@@ -931,6 +951,7 @@ footer {
 
 
 /* Description block */
+/* Description block */
 .about-description {
     background: #ffffff;
     padding: 28px 32px;
@@ -940,12 +961,21 @@ footer {
 }
 
 .about-description p {
-    font-size: 1.15rem;              /* More aesthetic size */
-    line-height: 1.9;
+    font-size: 1.2rem;
+    line-height: 1.8; /* Increased from 1.6 to give lines more breathing room */
     color: #000000;
     letter-spacing: 0.25px;
     word-spacing: 1.5px;
     font-weight: 400;
+    
+    /* This is the key fix for "mixing" paragraphs: */
+    margin-bottom: 1.5rem; 
+    display: block; /* Ensures it takes up its own line */
+}
+
+/* Optional: Removes margin from the very last paragraph so it fits the box nicely */
+.about-description p:last-child {
+    margin-bottom: 0;
 }
 
 /* Social section */
@@ -958,6 +988,7 @@ footer {
     font-weight: 600;
     margin-bottom: 10px;
     color: #222;
+    padding-bottom: 5px;
 }
 
 .social-list {
@@ -986,20 +1017,6 @@ footer {
     color: #000000;
 }
 
-/* Responsive */
-@media (max-width: 700px) {
-    .about-header h1 {
-        font-size: 2.2rem;
-    }
-
-    .about-hero img {
-        height: 240px;
-    }
-
-    .about-description p {
-        font-size: 1.05rem;
-    }
-}
 
 
 /* Searchbar page css */
@@ -1330,4 +1347,119 @@ footer {
         height: 140px;
     }
 }
+/* -------------------------------------- */
 
+/* --- Mobile Fixes for About & Blog Details --- */
+/* --- Master Mobile Fix (Wikipedia Style) --- */
+@media screen and (max-width: 768px) {
+
+    /* =========================================
+       1. Global Container Fixes (About & Blog)
+       ========================================= */
+    .about-container, 
+    .main-article {
+        padding: 15px !important;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    /* =========================================
+       2. Wikipedia-Style Typography
+       ========================================= */
+    
+    /* Standard Wikipedia Font Stack */
+    body, 
+    .about-description, 
+    .blog-text,
+    p {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Lato, Helvetica, Arial, sans-serif !important;
+        color: #000000 !important; /* Official Wikipedia Dark Gray */
+    }
+
+    /* Headings (Serif for titles, like Wiki) */
+    .article-header h1, 
+    .about-header h1 {
+        font-family: 'Linux Libertine', 'Georgia', Times, serif !important;
+        font-size: 2.5rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5em !important;
+        border-bottom: 1px solid #eaecf0; /* Wiki style underline */
+        padding-bottom: 10px;
+    }
+
+    /* Body Text (The "Wiki" Look) */
+    .blog-text p, 
+    .about-description p,
+    .about-description,
+    .lead-text {
+        font-size: 16px !important; /* Wikipedia standard mobile size */
+        line-height: 1.6 !important; /* Comfortable reading height */
+        margin-bottom: 1em !important; /* Standard paragraph spacing */
+        text-align: left !important;
+        word-spacing: normal !important;
+        letter-spacing: normal !important;
+    }
+
+    /* =========================================
+       3. Specific Layout Fixes
+       ========================================= */
+    
+    /* Fix About Description Box to look like a clean page */
+    .about-description {
+        background: transparent !important; /* Remove white box background */
+        box-shadow: none !important; /* Remove shadow for flat text look */
+        padding: 0 !important; /* Remove internal padding */
+        border-radius: 0 !important;
+    }
+
+    /* Fix About Hero Image */
+    .about-hero img {
+        height: auto !important; /* Allow natural height */
+        max-height: 300px; /* Limit height so it doesn't take whole screen */
+        border-radius: 4px !important; /* Sharper corners */
+        box-shadow: none !important;
+        margin-bottom: 20px;
+    }
+
+    /* Fix Comment Section */
+    .comment-text {
+        font-size: 14px !important;
+        line-height: 1.5;
+    }
+}
+
+
+/* --- Mobile Fix for Social Section --- */
+/* --- Mobile Fix for Social Section --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Add space at the bottom */
+    .social-section {
+        padding-bottom: 40px; 
+    }
+
+    .social-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: black; 
+    }
+
+    /* 2. Smaller buttons */
+    .social-list a {
+        padding: 8px 16px; 
+        font-size: 0.85rem; 
+        border: 1px solid transparent; /* Prepare for border change */
+    }
+
+    .social-list li {
+        margin: 4px 4px; 
+    }
+
+    /* 3. Hover Effect (Added) */
+    .social-list a:hover {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #000000; /* Adds a border so the white button is visible */
+    }
+}

@@ -1,27 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block content %}
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="mobile-overlay" onclick="toggleSidebar()"></div>
 
 <div class="dashboard-wrapper">
     
-    {% include 'dashboard/sidebar.html' %}
+    <div id="dashboard-sidebar">
+        {% include 'dashboard/sidebar.html' %}
+    </div>
 
     <main class="main-content">
         
         <header class="page-header">
-            <h2>All Categories</h2>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                <h2>All Categories</h2>
+            </div>
+
             <a href="{% url "add_categories" %}" class="btn btn-primary">
                 <i class="fa-solid fa-plus"></i> Add New
             </a>
         </header>
 
-        
-        <!-- Message Code -->
         {% if messages %}
             <div id="toast-container">
                 {% for message in messages %}
@@ -37,7 +41,6 @@
                 {% endfor %}
             </div>
         {% endif %}
-
 
         <div class="content-card">
             <table class="styled-table">
@@ -85,22 +88,24 @@
     </main>
 </div>
 
-{% comment %} JS for Message to disappear after 3 seconds {% endcomment %}
-
 <script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar'); 
+        const overlay = document.querySelector('.mobile-overlay');
+        if(sidebar && overlay) {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+
+    // Toast Message Script
     document.addEventListener("DOMContentLoaded", function() {
-        // Select all toast messages
         const toasts = document.querySelectorAll('.glass-toast');
-        
         toasts.forEach(toast => {
-            // Wait 3.5 seconds before starting to fade out
             setTimeout(() => {
-                // Force the fade out using inline styles (overrides CSS)
                 toast.style.transition = "opacity 0.5s ease, transform 0.5s ease";
                 toast.style.opacity = "0";
-                toast.style.transform = "translateX(100px)"; // Slide away
-                
-                // Wait for the transition to finish (0.5s), then delete the HTML element
+                toast.style.transform = "translateX(100px)"; 
                 setTimeout(() => {
                     toast.remove();
                 }, 500); 
@@ -110,4 +115,3 @@
 </script>
 
 {% endblock %}
-

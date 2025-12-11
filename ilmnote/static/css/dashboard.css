@@ -213,33 +213,93 @@ body {
     color: #15803d;
 }
 
-/* --- Mobile Responsiveness --- */
+/* --- Mobile Responsiveness (Slide-Out Sidebar Fix) --- */
 @media (max-width: 768px) {
+    
     .dashboard-wrapper {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
+        display: block; /* Removes flex constraints so body scrolls naturally */
         position: relative;
-        padding-bottom: 1rem;
-    }
-    
-    .sidebar-nav {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 0;
+        overflow-x: hidden; /* Prevents side-scrolling */
     }
 
+    /* 1. Hide Sidebar Off-Screen by default */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px; /* Hide it 280px to the left */
+        width: 260px;
+        height: 100vh;
+        z-index: 1050; /* Sit on top of everything */
+        transition: left 0.3s ease-in-out;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    /* 2. The Class to Slide it In (Added via JS) */
+    .sidebar.active {
+        left: 0; /* Bring it back to screen */
+    }
+
+    /* 3. Reset Sidebar Nav to be Vertical (Like Laptop) */
+    .sidebar-nav {
+        flex-direction: column; /* Forces vertical list */
+        overflow-x: hidden;
+        padding-bottom: 2rem;
+    }
+
+    /* 4. Main Content Fixes */
     .main-content {
-        padding: 1.5rem;
+        padding: 1.5rem 1rem;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* 5. Header Adjustments */
+    .top-header {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+
+    .username {
+        font-size: 1.5rem; /* Smaller font for mobile */
+    }
+
+    /* 6. Fix Stats Grid for Mobile */
+    .stats-container {
+        grid-template-columns: 1fr; /* Stack cards 1 on top of another */
     }
     
-    .nav-link span {
-        font-size: 0.9rem;
+    /* 7. Overlay when menu is open */
+    .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+    }
+    
+    .mobile-overlay.active {
+        display: block;
+    }
+    
+    /* 8. Mobile Toggle Button (Visible only on mobile) */
+    .mobile-toggle {
+        display: block !important;
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-right: 15px;
+        color: #111827;
     }
 }
+
+/* Hide toggle on Laptop */
+.mobile-toggle {
+    display: none; 
+}
+
 
 /* categories (dashboard) */
 
@@ -1092,4 +1152,114 @@ td:nth-child(6) .table-primary-text {
 .icon-cell {
     text-align: center;
     vertical-align: middle;
+}
+
+
+/* --- Force Mobile Scrolling Fix --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Force the main page to grow with the content */
+    html, body {
+        height: auto !important;
+        overflow-y: auto !important; /* Allow the browser window to scroll */
+    }
+
+    /* 2. Stop the wrapper from being fixed height */
+    .dashboard-wrapper {
+        display: block !important;
+        height: auto !important;
+        min-height: 100vh;
+        overflow: visible !important;
+    }
+
+    /* 3. DISABLE internal scrolling on the content box */
+    /* This is the most important part! */
+    .main-content {
+        height: auto !important;
+        overflow-y: visible !important; /* Let content spill out so body can scroll it */
+        flex: none !important;
+        padding-bottom: 50px; /* Adds space at bottom so you can scroll past the last row */
+    }
+
+    /* 4. Fix Table Scrolling */
+    /* Allows table to scroll SIDEWAYS, but lets vertical scroll happen on body */
+    .content-card {
+        width: 100%;
+        overflow-x: auto; /* Horizontal scroll for wide tables */
+        overflow-y: visible; /* No vertical scrollbar on the card itself */
+        display: block;
+    }
+}
+
+
+/* --- Compact Table for Mobile --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Shrink the white container padding */
+    .content-card {
+        border-radius: 8px; /* Smaller corners */
+    }
+
+    /* 2. Tighten Table Cells (Headers and Data) */
+    .styled-table th, 
+    .styled-table td {
+        padding: 12px 10px !important; /* drastically reduces spacing */
+        font-size: 13px !important; /* Smaller, readable font */
+        white-space: nowrap; /* Keeps rows on one line (forces horizontal scroll) */
+    }
+
+    /* 3. Make the Header text smaller/compact */
+    .styled-table th {
+        font-size: 11px !important;
+        letter-spacing: 0.5px;
+    }
+
+    /* 4. Shrink the Action Buttons (Edit/Delete) */
+    .action-link {
+        width: 28px !important; /* Smaller square */
+        height: 28px !important;
+        font-size: 12px !important; /* Smaller icon */
+        border-radius: 6px !important;
+    }
+    
+    .action-buttons {
+        gap: 6px !important; /* Less space between buttons */
+    }
+
+    /* 5. Shrink Status Badges (Active/Live pills) */
+    .stat-indicator,
+    td .table-primary-text {
+        padding: 2px 8px !important;
+        font-size: 11px !important;
+    }
+
+    /* 6. Fix Icons in the "Featured" column */
+    .icon-cell i {
+        font-size: 14px !important;
+    }
+}
+
+/* --- Fix Mobile Headers & Add Buttons --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Shrink the Header Title (e.g., "All Posts") */
+    .page-header h2 {
+        font-size: 1.1rem !important; /* Much smaller than the desktop 1.85rem */
+        margin-bottom: 0 !important;
+    }
+
+    /* 2. Shrink the "Add New" Button */
+    .page-header .btn {
+        padding: 8px 14px !important; /* Reduced padding */
+        font-size: 12px !important; /* Smaller text */
+        height: auto !important;
+        line-height: 1 !important;
+        border-radius: 20px !important; /* Keeps the pill shape but smaller */
+        gap: 5px !important; /* Brings icon closer to text */
+    }
+
+    /* 3. Reduce gap between Header and Table */
+    .page-header {
+        margin-bottom: 1.5rem !important;
+    }
 }

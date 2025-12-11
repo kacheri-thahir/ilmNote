@@ -4,17 +4,26 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="mobile-overlay" onclick="toggleSidebar()"></div>
 
 <div class="dashboard-wrapper">
     
-    {% include 'dashboard/sidebar.html' %}
+    <div id="dashboard-sidebar">
+        {% include 'dashboard/sidebar.html' %}
+    </div>
 
     <main class="main-content">
         
         {% if perms.auth.view_user %}
         <header class="page-header">
-            <h2>All Users</h2>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                <h2>All Users</h2>
+            </div>
+
             <a href="{% url "add_user" %}" class="btn btn-primary">
                 <i class="fa-solid fa-plus"></i> Add New User
             </a>
@@ -103,5 +112,31 @@
         {% endif %}
     </main>
 </div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar'); 
+        const overlay = document.querySelector('.mobile-overlay');
+        if(sidebar && overlay) {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+
+    // Toast Script
+    document.addEventListener("DOMContentLoaded", function() {
+        const toasts = document.querySelectorAll('.glass-toast');
+        toasts.forEach(toast => {
+            setTimeout(() => {
+                toast.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(100px)"; 
+                setTimeout(() => {
+                    toast.remove();
+                }, 500); 
+            }, 3500); 
+        });
+    });
+</script>
 
 {% endblock %}

@@ -1,21 +1,33 @@
+
 {% extends "base.html" %}
 {% load static %}
 
 {% block content %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="mobile-overlay" onclick="toggleSidebar()"></div>
 
 <div class="dashboard-wrapper">
     
-    {% include "dashboard/sidebar.html" %}
+    <div id="dashboard-sidebar">
+        {% include "dashboard/sidebar.html" %}
+    </div>
 
     <main class="main-content">
         
         <header class="top-header">
-            <div class="header-text">
-                <p class="greeting">Welcome back,</p>
-                <h1 class="username">{{ user.username }}</h1> 
+            <div style="display: flex; align-items: center; gap: 15px;">
+                
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                
+                <div class="header-text">
+                    <p class="greeting">Welcome back,</p>
+                    <h1 class="username">{{ user.username }}</h1> 
+                </div>
             </div>
+
             <div class="header-profile">
                 <div class="profile-circle">{{ user.username|slice:":1"|upper }}</div>
             </div>
@@ -49,5 +61,21 @@
 
     </main>
 </div>
+
+<script>
+    function toggleSidebar() {
+        // Target the sidebar div directly
+        // Note: We need to target the .sidebar class inside your include
+        // or the wrapper div we made above. 
+        
+        const sidebar = document.querySelector('.sidebar'); 
+        const overlay = document.querySelector('.mobile-overlay');
+        
+        if(sidebar && overlay) {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+</script>
 
 {% endblock %}

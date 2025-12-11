@@ -37,7 +37,7 @@ class Blog(models.Model):
 
 class About(models.Model):
     about_heading=models.CharField(max_length=25)
-    about_description=models.TextField(max_length=1000)
+    about_description=models.TextField()
     about_image=models.ImageField(upload_to='about_image')
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
