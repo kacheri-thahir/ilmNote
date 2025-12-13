@@ -20,10 +20,12 @@ from . import views
 from django.conf.urls.static import static  #mediafile configuration
 from django.conf import settings            #mediafile configuration
 from blogs import views as Blogsview
+from dashboard.admin_site import secure_admin_site
+
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('ilmNote/secure-admin-thahir/', admin.site.urls),  # Rename admin from /admin 
+    path('ilmNote/secure-admin-thahir/', secure_admin_site.urls),  # Rename /admin to custom admin like this..
 
 
     path('',views.home,name='home'),
