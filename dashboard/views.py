@@ -151,7 +151,10 @@ def delete_post(request,pk):
 # Dashboard Users Field
 @staff_only
 def users(request):
-    users=User.objects.all()
+    if request.user.is_superuser:
+        users=User.objects.all()
+    else:
+        users=User.objects.filter(is_superuser=False)
     context={
         'users' : users
     }
@@ -161,13 +164,25 @@ def users(request):
 @staff_only
 def add_user(request):
     if request.method=='POST':
-        form=AddUserForm(request.POST)
+        form=AddUserForm(request.POST, request_user=request.user)
         if form.is_valid():
-            form.save()
+            user=form.save(commit=False)
+
+            # Managers cannot create superusers
+            if not request.user.is_superuser:   #if manager wants to create a user in dashboard he cant see user.is_superuser,user.is_staff,permissions, he cant create a superuser
+                user.is_superuser=False
+                user.is_staff=False
+            user.save()
+
+            # Save Many-to-Many fields only if present (superuser sees them)
+            if request.user.is_superuser:
+                form.save_m2m()
+            
             return redirect('users')
         else:
             print(form.errors)
-    form=AddUserForm()
+
+    form=AddUserForm(request_user=request.user)
     context={
         'form' : form,
     }
@@ -177,12 +192,23 @@ def add_user(request):
 @staff_only
 def edit_user(request,pk):
     user=get_object_or_404(User,pk=pk)
+
+     # Block managers from editing superusers
+    if user.is_superuser and not request.user.is_superuser:
+        return redirect('users')
+    
     if request.method=='POST':
-        form=EditUserForm(request.POST,instance=user)
+        form=EditUserForm(request.POST,instance=user,request_user=request.user)
         if form.is_valid():
-            form.save()
+            user=form.save(commit=False)
+            user.save()
+
+             # Save groups & permissions only for superuser
+            if request.user.is_superuser:
+                form.save_m2m()
+                
             return redirect('users')
-    form=EditUserForm(instance=user)
+    form=EditUserForm(instance=user,request_user=request.user)
     context={
         'form' : form
     }
@@ -192,6 +218,10 @@ def edit_user(request,pk):
 @staff_only
 def delete_user(request,pk):
     user=get_object_or_404(User,pk=pk)
+    # prevent managers to delete superuser
+    if user.is_superuser and not request.user.is_superuser:
+        return redirect('users')
+    
     if request.method == 'POST':
         user.delete()
         return redirect('users')

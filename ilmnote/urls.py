@@ -22,7 +22,10 @@ from django.conf import settings            #mediafile configuration
 from blogs import views as Blogsview
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('ilmNote/secure-admin-thahir/', admin.site.urls),  # Rename admin from /admin 
+
+
     path('',views.home,name='home'),
     path('category/',include('blogs.urls')),
     path('about/',views.about,name='about'),

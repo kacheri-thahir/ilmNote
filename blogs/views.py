@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect,get_object_or_404
 from . models import Blog,Category,Comment
 from django.db.models import Q
+from django.db.models.functions import Replace, Lower
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -57,7 +58,7 @@ def blogs(request,slug):
 # search bar views
 
 def search(request):
-    keyword=request.GET.get('keyword')
+    keyword=request.GET.get('keyword').strip()
     blogs=Blog.objects.filter(Q(title__icontains = keyword) | Q(short_description__icontains=keyword) | Q(blog_body__icontains=keyword) , status='Published')
 
     context={
@@ -65,3 +66,6 @@ def search(request):
         'keyword' : keyword,
     }
     return render(request,'search.html',context)
+
+
+

@@ -25,7 +25,8 @@
         
         <div class="content-card form-wrapper">
             
-            <form action="#" method="POST" novalidate>   
+            <form  method="POST" novalidate> 
+                {% csrf_token %}  
                 
                 <div class="input-container">
                     {{ form.as_p }}

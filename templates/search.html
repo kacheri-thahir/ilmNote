@@ -1,71 +1,80 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <!-- Internal Styles for Search Page -->
-<link rel="stylesheet" href="search-style.css">
+<link rel="stylesheet" href="css/blogs.css">
 
 <main class="container search-container">
     
     <!-- Header Section -->
     <div class="section-header">
-        <h1>
-            <span class="search-label">SEARCH RESULTS FOR</span>
-            <span class="keyword-text">{{ keyword|upper }}</span>
-        </h1>
-    </div>
+        {% if keyword %}
+         <h1>
+             <span class="search-label">SEARCH RESULTS FOR</span>
+             <span class="keyword-text">{{ keyword|upper }}</span>
+            </h1>
+        {% else %}
+        <h2>No Results</h2>
+        {% endif %}
+        </div>
 
     <div class="divider"></div>
 
     <!-- Results Grid -->
     <div class="blog-grid">
+    {% if keyword %}
         {% if blogs %}
-            {% for i in blogs %}
-            <article class="card">
+        {% for i in blogs %}
+        <article class="card">
+            
+            <!-- Card Image -->
+            <div class="card-image">
+                {% if i.featured_image %}
+                <a href="{% url "blogs" i.slug %}">
+                    <img src="{{ i.featured_image.url }}" alt="{{ i.title }}">
+                </a>
+                {% endif %}
+            </div>
+            
+            <!-- Card Content -->
+            <div class="card-content">
                 
-                <!-- Card Image -->
-                <div class="card-image">
-                    {% if i.featured_image %}
-                    <a href="{% url "blogs" i.slug %}">
-                        <img src="{{ i.featured_image.url }}" alt="{{ i.title }}">
-                    </a>
-                    {% endif %}
-                </div>
+                <!-- Title (Wrapped in your original structure) -->
+                <span class="card-category">
+                    <h3><a href="{% url "blogs" i.slug %}">{{ i.title }}</a></h3>
+                </span>
                 
-                <!-- Card Content -->
-                <div class="card-content">
-                    
-                    <!-- Title (Wrapped in your original structure) -->
-                    <span class="card-category">
-                        <h3><a href="{% url "blogs" i.slug %}">{{ i.title }}</a></h3>
-                    </span>
-                    
-                    <!-- Short Description -->
-                    <h4 class="card-subtitle">{{ i.short_description|truncatewords:10 }}</h4>
-                    
-                    <!-- Body Excerpt -->
-                    <p class="card-excerpt">{{ i.blog_body|truncatewords:10 }}</p>
-                    
-                    <!-- Footer -->
-                    <div class="card-footer">
-                        <span class="author">By {{ i.author }}</span>
-                        <span class="date">{{ i.created_at|timesince }} ago</span>
-                    </div>
+                <!-- Short Description -->
+                <h4 class="card-subtitle">{{ i.short_description|truncatewords:10 }}</h4>
+                
+                <!-- Body Excerpt -->
+                <p class="card-excerpt">{{ i.blog_body|truncatewords:10 }}</p>
+                
+                <!-- Footer -->
+                <div class="card-footer">
+                    <span class="author">By {{ i.author }}</span>
+                    <span class="date">{{ i.created_at|timesince }} ago</span>
                 </div>
-
-            </article>
-            {% endfor %}
+            </div>
+            
+        </article>
+        {% endfor %}
         
         {% else %}
-            <!-- No Results State -->
-            <div class="no-results">
-                <h2>
-                    <span class="no-results-label">OOPS!</span>
-                    NO POSTS AVAILABLE
-                </h2>
-                <p>We couldn't find what you're looking for. Try searching for a different keyword.</p>
-            </div>
+        <!-- No Results State -->
+        <div class="no-results">
+            <h2>
+                <span class="no-results-label">OOPS!</span>
+                NO POSTS AVAILABLE
+            </h2>
+            <p>We couldn't find what you're looking for.</p>
+        </div>
         {% endif %}
+    {% else %}
+    <div class="no-results">
+        <h4>Start typing to search...</h4>
+    </div>
+    {% endif %}
     </div>
 
 </main>

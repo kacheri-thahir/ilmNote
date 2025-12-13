@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
+{% comment %}
 {% block content %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -74,6 +74,7 @@
                             <td class="icon-cell"> {% if user.is_staff  %}<i class="fa-regular fa-circle-check" style="color: green;">{% else %}<i class="fa-regular fa-circle-xmark" style="color: red;"></i>{% endif %} </td>
                             <td class="icon-cell"> {% if user.is_superuser %}<i class="fa-regular fa-circle-check" style="color: green;">{% else %}<i class="fa-regular fa-circle-xmark" style="color: red;"></i>{% endif %} </td>
                             <td>
+                                {% if not user.is_superuser or request.user.is_superuser %}
                                 <div class="action-buttons">
                                     <a href="{% url "edit_user" user.pk  %}" class="action-links edit" title="Edit">
                                         <i class="fa-regular fa-pen-to-square"></i>
@@ -83,6 +84,7 @@
                                         <i class="fa-regular fa-trash-can"></i>
                                     </a>
                                 </div>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -108,6 +110,164 @@
                 </a>
             </h5>
 
+        </div>
+        {% endif %}
+    </main>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar'); 
+        const overlay = document.querySelector('.mobile-overlay');
+        if(sidebar && overlay) {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+
+    // Toast Script
+    document.addEventListener("DOMContentLoaded", function() {
+        const toasts = document.querySelectorAll('.glass-toast');
+        toasts.forEach(toast => {
+            setTimeout(() => {
+                toast.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(100px)"; 
+                setTimeout(() => {
+                    toast.remove();
+                }, 500); 
+            }, 3500); 
+        });
+    });
+</script>
+
+{% endblock %} {% endcomment %}
+
+
+
+
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="mobile-overlay" onclick="toggleSidebar()"></div>
+
+<div class="dashboard-wrapper">
+    
+    <div id="dashboard-sidebar">
+        {% include 'dashboard/sidebar.html' %}
+    </div>
+
+    <main class="main-content">
+        
+        {% if perms.auth.view_user %}
+        <header class="page-header">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                <h2>All Users</h2>
+            </div>
+
+            <a href="{% url 'add_user' %}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Add New User
+            </a>
+        </header>
+
+        {% if messages %}
+        <div id="toast-container">
+            {% for message in messages %}
+            <div class="glass-toast">
+                <div class="toast-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="toast-content">
+                    <span class="toast-title">Successfully</span>
+                    <span class="toast-message">{{ message }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="content-card">
+            <div style="overflow-x: auto;">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Is Active</th>
+                            <th>Staff</th>
+                            <th>SuperUser</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ user.first_name }} {{ user.last_name }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td class="icon-cell">
+                                {% if user.is_active %}
+                                    <i class="fa-regular fa-circle-check" style="color: green;"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-circle-xmark" style="color: red;"></i>
+                                {% endif %}
+                            </td>
+                            <td class="icon-cell">
+                                {% if user.is_staff %}
+                                    <i class="fa-regular fa-circle-check" style="color: green;"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-circle-xmark" style="color: red;"></i>
+                                {% endif %}
+                            </td>
+                            <td class="icon-cell">
+                                {% if user.is_superuser %}
+                                    <i class="fa-regular fa-circle-check" style="color: green;"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-circle-xmark" style="color: red;"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% comment %} Only show actions if the row user is not superuser or logged-in user is superuser {% endcomment %}
+                                {% if not user.is_superuser or request.user.is_superuser %}
+                                <div class="action-buttons">
+                                    <a href="{% url 'edit_user' user.pk %}" class="action-links edit" title="Edit">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    &nbsp;
+                                    <a href="{% url 'delete_user' user.pk %}" class="action-links delete" title="Delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </a>
+                                </div>
+                                {% else %}
+                                <span class="no-actions">—</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            {% if not users %}
+            <div class="empty-state">
+                <p>No users found.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        {% else %}
+        <div class="permission-denied">
+            <h5>
+                ⚠️ You Don't Have Permissions To Access This Page!
+                <a href="{% url 'home' %}">Go Back safely</a>
+            </h5>
         </div>
         {% endif %}
     </main>
